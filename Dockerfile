@@ -1,5 +1,7 @@
 FROM alpine:3.14
-RUN apk add --no-cache iperf3
+RUN apk add --no-cache iperf3 bash
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+COPY . .
 EXPOSE 5201
-RUN echo "Running iperf3 test to $TARGET:$TARGET_PORT"
-CMD /usr/bin/iperf3 -c $TARGET -p $TARGET_PORT
+CMD "bash iperf_test.sh"
